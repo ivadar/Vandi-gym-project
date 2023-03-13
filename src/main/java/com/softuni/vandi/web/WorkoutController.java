@@ -32,13 +32,14 @@ public class WorkoutController {
 
 
 
-//    @GetMapping("/workout")
-//    public String post(Model model){
+   @GetMapping("/workout")
+   public String post(Model model){
 //        List<SignedUpWorkoutsOfUser> signedUpWorkoutsOfUsers = this.userService.currentWorkouts();
 //        model.addAttribute("currentWorkouts", signedUpWorkoutsOfUsers);
-//        return "/workout";
-//    }
+       return "/workout";
+   }
 
+   // TODO (gg): shouldn't need PreAuthorize if authorization is setup properly in SecurityFilterChain
     @GetMapping("/cancel/{id}")
     @PreAuthorize("isAuthenticated()")
     public String cancel(@PathVariable Long id){

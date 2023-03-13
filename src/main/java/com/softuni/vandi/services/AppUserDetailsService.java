@@ -21,6 +21,7 @@ public class AppUserDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // TODO (gg): this is actually looking up by email, not by username
         return
                 userRepository.
                         findUserByEmail(username).
