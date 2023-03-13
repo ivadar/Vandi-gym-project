@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VANDI</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <style>
+        .btn-about {
+
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<div class="container text-center mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to VANDI Gym!</h1>
+        <hr class="my-3 bg-white w-50">
+        <p class="h4">Thank you for visiting our site. To access our services, please register or log in.</p>
+        <div class="d-flex justify-content-center">
+            <a href="/about" class="btn btn-about btn-primary">About Us</a>
+        </div>
+
+    </div>
+
+</div>
+<footer>© VANDI Team 2023. All rights reserved.</footer>
+</body>
+</html>

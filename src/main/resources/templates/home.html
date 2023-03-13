@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VANDI</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+       p {
+            font-weight: bold;
+            font-size: 28px;
+           background-repeat: repeat-x;
+           background-color: #040505;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+        }
+        td {
+            background-color: #4e555b;
+            background-blend-mode: color-burn;
+            padding: 8px;
+            font-weight: bold;
+        }
+        button {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+
+
+<div>
+    <h3 class="mySticky bg-transparent text-white font-weight-bold  mb-0 mt-2" style="font-size: 50px">Schedule</h3>
+    <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
+        <table class="table table-striped table-dark">
+            <table style="width: fit-content">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Workout</th>
+                    <th>Trainer</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>Sign Up</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="s : ${scheduele}" th:object="${s}">
+                <td class="bg-info" scope="row" style="width: 5%">
+                    <img class="mr-2 " src="/img/workout.png" alt="Etiquette" width="35px"
+                         height="35px">
+                </td>
+                <td style="width: 5%" class="bg-primary">
+                    <a th:text="*{name.name()}"></a>
+                </td>
+                <td class="bg-primary" style="width: 15%">
+                    <a th:text="*{trainer.firstName}"></a>
+                </td>
+                <td class="bg-primary" style="width: 15%">
+                    <a th:text="*{time}"></a>
+                </td>
+
+                <td class="bg-primary" style="width: 15%">
+                    <a th:text="|*{price} €|"></a>
+                </td>
+
+                    <td style="width: 10%">
+                        <a th:href="@{/workouts/sign-up/{id}(id=*{id})}">
+                            <button class="btn btn-success">Sign Up</button>
+                        </a>
+                    </td>
+
+
+
+                </tr>
+                </tbody>
+        </table>
+        </table>
+    </div>
+</div>
+</div>
+
+<footer>© VANDI Team 2023. All rights reserved.</footer>
+</body>
+</html>

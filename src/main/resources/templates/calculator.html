@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VANDI</title>
+  <link rel="stylesheet" href="/css/reset-css.css"/>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<main>
+  <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Calorie calculator</span></h1>
+  <hr class="hr-3 w-25 bg-white"/>
+
+  <form class="mx-auto w-25 bg-blur" th:object="${calculator}" action="/workouts/calculator">
+    <th:block th:each="e : ${#fields.errors()}" th:object="${e}">
+      <small th:text="${e}" class="text-danger">Error message</small>
+      <br/>
+    </th:block>
+    <div class="form-group">
+      <div class="label-holder text-white d-flex justify-content-center">
+        <label for="weight" class="h3 mb-2">Weight</label>
+      </div>
+      <input th:field="*{weight}" th:errorclass="bg-danger" type="text" class="form-control" id="weight" name="weight"/>
+    </div>
+
+    <div class="form-group">
+      <div class="label-holder text-white d-flex justify-content-center">
+        <label for="height" class="h3 mb-2">Height</label>
+      </div>
+      <input th:field="*{height}" th:errorclass="bg-danger" type="text" class="form-control" id="height" name="height"/>
+    </div>
+
+    <div class="form-group">
+      <div class="label-holder text-white d-flex justify-content-center">
+        <label for="age" class="h3 mb-2">Age</label>
+      </div>
+      <input th:field="*{age}" th:errorclass="bg-danger" type="text" class="form-control" id="age" name="age"/>
+    </div>
+
+    <div class="form-group">
+      <div class="label-holder text-white d-flex justify-content-center">
+    <label for="activityLevel" class="h3 mb-2">Activity Level:</label>
+      </div>
+    <select type="text" class="form-control" id="activityLevel" name="activityLevel" th:field="*{activityLevel}">
+      <option th:each="level : ${T(com.myproject.vandigym.model.enums.ActivityLevel).values()}"
+              th:value="${level.factor}"
+              th:text="${level.displayName}">
+      </option>
+    </select>
+
+    <div class="button-holder d-flex justify-content-center">
+      <a th:href="@{/workouts/calculate}">
+        <button class="btn btn-success">Calculate</button>
+      </a>
+    </div>
+      <div class="form-group">
+        <div class="label-holder text-white d-flex justify-content-center">
+          <label for="result" class="h3 mb-2">Result</label>
+        </div>
+        <input type="text" class="form-control" id="result" name="result"  th:text="${result}" readonly/>
+      </div>
+    </div>
+  </form>
+</main>
+<footer>© VANDI Team 2023. All rights reserved.</footer>
+</body>
+</html>

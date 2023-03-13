@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VANDI</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        p {
+            font-weight: bold;
+            font-size: 28px;
+            background-repeat: repeat-x;
+            background-color: #040505;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+        }
+        td {
+            background-color: #4e555b;
+            background-blend-mode: color-burn;
+            padding: 8px;
+            font-weight: bold;
+        }
+        button {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<div>
+    <h3 class="mySticky bg-transparent text-white font-weight-bold  mb-0 mt-2" style="font-size: 50px">Your workouts</h3>
+    <div class="bg-transparent rounded m-auto" style="height: 31vh; overflow: auto">
+        <table class="table table-striped table-dark">
+            <table >
+                <thead style="background-color: #040505; text-align: left; border-bottom: 2px solid #ddd;">
+                <tr>
+                    <th style="padding: 12px; border-right: 2px solid #ddd; border-top: 2px solid #ddd;">Workout Name</th>
+                    <th style="padding: 12px; border-right: 2px solid #ddd; border-top: 2px solid #ddd;">Trainer</th>
+                    <th style="padding: 12px; border-right: 2px solid #ddd; border-top: 2px solid #ddd;">Time</th>
+                    <th style="padding: 12px; border-right: 2px solid #ddd; border-top: 2px solid #ddd;">Price</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop through the list of signed-up workouts -->
+                <tr th:each="c : ${currentWorkouts}" th:object="${c}">
+                    <td th:text="*{name.name()}">pilates </td>
+                    <td th:text="|*{trainer.firstName} *{trainer.lastName}|">Ivan</td>
+                    <td th:text="*{time}">9:00</td>
+                    <td th:text="*{price}">29</td>
+                    <td >
+                        <a th:href="@{/workouts/cancel/{id}(id=*{id})}">
+                            <button class="btn btn-success">Cancel</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </table>
+    </div>
+</div>
+</div>
+<footer>© VANDI Team 2023. All rights reserved.</footer>
+</body>
+</html>
