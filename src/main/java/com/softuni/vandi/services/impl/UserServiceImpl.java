@@ -1,13 +1,15 @@
 package com.softuni.vandi.services.impl;
 
 
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.softuni.vandi.model.entity.User;
-import com.softuni.vandi.model.enums.UserRoleEnum;
 import com.softuni.vandi.model.service.UserServiceModel;
 import com.softuni.vandi.repositories.UserRepository;
 import com.softuni.vandi.services.UserService;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,6 +28,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
         User user = this.modelMapper.map(userServiceModel,User.class);
+
+        // TODO (gg): Is there an automatic way to do this? Seems hacky to do explicitly here.
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(userServiceModel.getPassword()));
 
 
         this.userRepository.saveAndFlush(user);

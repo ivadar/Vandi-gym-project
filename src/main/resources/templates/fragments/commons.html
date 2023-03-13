@@ -15,7 +15,7 @@
 <body>
 <header>
     <nav th:fragment="nav" class="navbar navbar-expand-lg bg-nav rounded">
-        <a th:href="@{/static}"> <img src="/img/workout.png" alt="VANDI GYM" width="50" height="50"></a>
+        <a th:href="@{/}"> <img src="/img/workout.png" alt="VANDI GYM" width="50" height="50"></a>
         <a sec:authorize="isAnonymous()" class="nav-link text-white active h5" th:href="@{/}"> VANDI GYM</a>
         <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" th:href="@{/workouts/calculator}">Calorie calculator</a>
         <a sec:authorize="isAuthenticated()" class="nav-link text-white active h5" th:href="@{/workouts/workout}">Your workouts</a>
@@ -33,7 +33,10 @@
                         <a class="nav-link text-white active h5" th:href="@{/users/register}">Register</a>
                     </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" th:href="@{/users/logout}">Logout</a>
+                    <form method="post" action="/logout">
+                        <!-- TODO (gg): Hacky styling -->
+                        <button class="nav-link text-white active h5" style="background: none; border: none; cursor: pointer" type="submit">Logout</button>
+                    </form>
                 </li>
             </ul>
             </th:block>
